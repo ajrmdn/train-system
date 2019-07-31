@@ -1,0 +1,19 @@
+<h1>Update Train <%=@train.id() %></h1>
+
+<form action="/trains/edit/<%= @train.id() %>" method="post">
+  <input name="_method" type="hidden" value="patch">
+
+  <label for="color">Recolor Train</label>
+  <input id="color" name="color" type="text" value="<%= @train.color() %>">
+  <label for="type">Edit Train Type</label>
+  <input id="type" name="type" type="text" value="<%= @train.type() %>">
+
+  <button type="submit">Update</button>
+</form>
+
+<form action="/trains/<%= @train.id() %>" method="post">
+  <input name="_method" type="hidden" value="delete">
+
+  <button type="submit">Delete Train</button>
+</form>
+<p><a href="/trains">Return to train list</a></p>

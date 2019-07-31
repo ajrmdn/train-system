@@ -1,0 +1,14 @@
+<h2>Cities</h2>
+
+<% if @cities.any? %>
+  <ul>
+    <% @cities.each do |city| %>
+      <li><a href="/cities/edit/<%= city.id %>"><%= city.name %></a><br /><b>Capacity:</b><%= city.capacity %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>There are currently no cities to display.</p>
+<% end %>
+
+<a href="/cities/new">Add a city</a>
+<a href="/">Return to home</a>

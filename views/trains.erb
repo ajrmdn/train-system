@@ -1,0 +1,14 @@
+<h2>Trains</h2>
+
+<% if @trains.any? %>
+  <ul>
+    <% @trains.each do |train| %>
+      <li><a href="/trains/edit/<%= train.id %>"><%= train.id %> <b>|</b> <%= train.color %> <b>|</b> <%= train.type %></a></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>There are currently no trains to display.</p>
+<% end %>
+
+<a href="/trains/new">Add a train</a>
+<a href="/">Return to home</a>

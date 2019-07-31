@@ -1,0 +1,19 @@
+<h1>Update City <%=@city.id() %></h1>
+
+<form action="/citys/edit/<%= @city.id() %>" method="post">
+  <input name="_method" type="hidden" value="patch">
+
+  <label for="name">Rename city</label>
+  <input id="name" name="name" type="text" value="<%= @city.name() %>">
+  <label for="capacity">Edit city Type</label>
+  <input id="type" name="capacity" type="text" value="<%= @city.capacity() %>">
+
+  <button type="submit">Update</button>
+</form>
+
+<form action="/cities/<%= @city.id() %>" method="post">
+  <input name="_method" type="hidden" value="delete">
+
+  <button type="submit">Delete city</button>
+</form>
+<p><a href="/cities">Return to city list</a></p>
