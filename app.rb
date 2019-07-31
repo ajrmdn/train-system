@@ -22,7 +22,7 @@ get ('/trains/new') do
 end
 
 post ('/trains') do
-  train = Train.new({:color => params[:color], :type => params[:type], :id => nil})
+  train = Train.new({:color => params[:color], :type => params[:type], :current_city => params[:current_city], :id => nil})
   train.save
   redirect to('/trains')
 end
@@ -34,7 +34,7 @@ end
 
 patch ('/trains/edit/:id') do
   @train = Train.find(params[:id].to_i)
-  @train.update(:color => params[:color], :type => params[:type], :id => nil)
+  @train.update(:color => params[:color], :type => params[:type], :current_city => params[:current_city], :id => nil)
   redirect to('/trains')
 end
 

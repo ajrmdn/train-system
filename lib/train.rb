@@ -1,10 +1,11 @@
 class Train
-  attr_accessor :color, :type
+  attr_accessor :color, :type, :current_city
   attr_reader :id
 
   def initialize(attributes)
     @color = attributes.fetch(:color)
     @type = attributes.fetch(:type)
+    @current_city = attributes.fetch(:current_city)
     @id = attributes.fetch(:id)
   end
 
@@ -14,8 +15,9 @@ class Train
     returned.each() do |train|
       color = train.fetch("color")
       type = train.fetch("type")
+      current_city = train.fetch("current_city")
       id = train.fetch("id").to_i
-      trains.push(Train.new({:color => color, :type => type, :id => id}))
+      trains.push(Train.new({:color => color, :type => type, :current_city => current_city, :id => id}))
     end
     trains
   end
@@ -29,15 +31,16 @@ class Train
     if train
       color = train.fetch("color")
       type = train.fetch("type")
+      current_city = train.fetch("current_city")
       id = train.fetch("id").to_i
-      Train.new({:color => color, :type => type, :id => id})
+      Train.new({:color => color, :type => type, :current_city => current_city, :id => id})
     else
       nil
     end
   end
 
   def save
-    result = DB.exec("INSERT INTO trains (color, type) VALUES ('#{@color}', '#{@type}') RETURNING id;")
+    result = DB.exec("INSERT INTO trains (color, type, current_city) VALUES ('#{@color}', '#{@type}', '#{@current_city}') RETURNING id;")
     @id = result.first().fetch("id").to_i
   end
 
@@ -48,8 +51,10 @@ class Train
   def update(attributes)
     (attributes.key? :color) ? @color = attributes.fetch(:color) : @color = nil
     (attributes.key? :type) ? @type = attributes.fetch(:type) : @type = nil
+    (attributes.key? :current_city) ? @current_city = attributes.fetch(:current_city) : @current_city = nil
     DB.exec("UPDATE trains SET color = '#{@color}' WHERE id = #{@id};")
     DB.exec("UPDATE trains SET type = '#{@type}' WHERE id = #{@id};")
+    DB.exec("UPDATE trains SET current_city = '#{@current_city}' WHERE id = #{@id};")
   end
 
   def delete
